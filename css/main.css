@@ -16,6 +16,7 @@ body {
     background-color: #DCE9FF;
     border-radius: 8px;
     overflow: hidden;
+    min-height: 90vh; /* Минимум 90% высоты экрана */
 }
 
 /* Боковая панель */
@@ -27,7 +28,8 @@ body {
 }
 
 .sidebar h2 {
-    font-size: 22px;
+    font-size: 30px;
+    margin-top: 0;
     margin-bottom: 20px;
 }
 
@@ -112,12 +114,12 @@ body {
     color: #007bff;
 }
 
-.task-buttons .edit-btn:hover {
-    color: #000000;
+.task-buttons .confirm-btn {
+    color: #28a745;
 }
 
-.task-buttons .confirm-btn:hover {
-    color: #28a745;
+.task-buttons .edit-btn:hover {
+    color: #000000;
 }
 
 .task-buttons .delete-btn:hover {
