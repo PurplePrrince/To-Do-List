@@ -11,8 +11,8 @@ body {
 /* Основной контейнер */
 .container {
     display: flex;
-    width: 80%;
-    margin: 40px auto;
+    width: 90%;
+    margin: 30px auto;
     background-color: #DCE9FF;
     border-radius: 8px;
     overflow: hidden;
@@ -109,10 +109,11 @@ body {
     cursor: pointer;
     font-size: 18px;
     padding: 5px;
+    color: #007bff;
 }
 
 .task-buttons .edit-btn:hover {
-    color: #007bff;
+    color: #000000;
 }
 
 .task-buttons .confirm-btn:hover {
@@ -120,7 +121,7 @@ body {
 }
 
 .task-buttons .delete-btn:hover {
-    color: #dc3545;
+    color: #000000;
 }
 
 .edit-input {
@@ -146,7 +147,7 @@ body {
 }
 
 .add-task:hover {
-    background: #f0f0f0;
+    background: #ffffff;
 }
 
 .add-task span {
@@ -162,4 +163,15 @@ body {
     font-size: 16px;
     background: transparent;
     color: gray;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2); /* Полупрозрачный черный цвет */
+    z-index: 10; /* Оверлей будет поверх всех элементов */
+    display: none; /* По умолчанию скрыт */
 }

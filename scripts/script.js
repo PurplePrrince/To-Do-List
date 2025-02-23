@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const taskContainer = document.querySelector(".tasks");
     const addTaskInput = document.querySelector(".add-task input");
     const addTaskButton = document.querySelector(".add-task span");
+    const overlay = document.getElementById("overlay");
 
     function createTask(text) {
         const task = document.createElement("div");
@@ -39,7 +40,6 @@ document.addEventListener("DOMContentLoaded", function () {
         task.appendChild(buttonContainer);
         taskContainer.insertBefore(task, taskContainer.lastElementChild);
     
-
         checkbox.addEventListener("change", function () {
             if (checkbox.checked) {
                 task.classList.add("completed");
@@ -57,6 +57,11 @@ document.addEventListener("DOMContentLoaded", function () {
             task.classList.add("add-task"); // Добавляем класс add-task
             editButton.style.display = "none";
             confirmButton.style.display = "inline";
+
+            // Показываем оверлей
+            overlay.style.display = "block";
+            task.style.position = "relative"; // Чтобы задача была поверх оверлея
+            task.style.zIndex = "20"; // Задача должна быть выше оверлея
         });
 
         confirmButton.addEventListener("click", function () {
@@ -66,6 +71,11 @@ document.addEventListener("DOMContentLoaded", function () {
             task.classList.remove("add-task"); // Убираем класс add-task
             confirmButton.style.display = "none";
             editButton.style.display = "inline";
+
+            // Скрываем оверлей
+            overlay.style.display = "none";
+            task.style.position = "static"; // Возвращаем позицию по умолчанию
+            task.style.zIndex = "auto"; // Возвращаем z-index по умолчанию
         });
 
         deleteButton.addEventListener("click", function () {
