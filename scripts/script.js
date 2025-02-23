@@ -53,8 +53,8 @@ document.addEventListener("DOMContentLoaded", function () {
             input.type = "text";
             input.value = label.textContent;
             input.classList.add("edit-input");
-
             task.replaceChild(input, label);
+            task.classList.add("add-task"); // Добавляем класс add-task
             editButton.style.display = "none";
             confirmButton.style.display = "inline";
         });
@@ -63,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const input = task.querySelector(".edit-input");
             label.textContent = input.value;
             task.replaceChild(label, input);
+            task.classList.remove("add-task"); // Убираем класс add-task
             confirmButton.style.display = "none";
             editButton.style.display = "inline";
         });
@@ -85,82 +86,4 @@ document.addEventListener("DOMContentLoaded", function () {
             addTaskButton.click();
         }
     });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-    const categoryContainer = document.querySelector(".categories");
-    const addCategoryBtn = document.querySelector(".add-category");
-
-    addCategoryBtn.addEventListener("click", function () {
-        createCategory("Новая категория");
-    });
-
-    function createCategory(name) {
-        const categoryItem = document.createElement("li");
-        categoryItem.classList.add("category-item");
-
-        const categoryName = document.createElement("span");
-        categoryName.textContent = name;
-        categoryName.classList.add("category-name");
-
-        const editButton = document.createElement("button");
-        editButton.innerHTML = '<i class="fas fa-edit"></i>'; // ✏️
-        editButton.classList.add("edit-category-btn");
-
-        const confirmButton = document.createElement("button");
-        confirmButton.innerHTML = '<i class="fas fa-check"></i>'; // ✅
-        confirmButton.classList.add("confirm-category-btn");
-        confirmButton.style.display = "none";
-
-        const deleteButton = document.createElement("button");
-        deleteButton.innerHTML = '<i class="fas fa-trash"></i>'; // 🗑️
-        deleteButton.classList.add("delete-category-btn");
-
-        const buttonContainer = document.createElement("div");
-        buttonContainer.classList.add("category-buttons");
-        buttonContainer.appendChild(editButton);
-        buttonContainer.appendChild(confirmButton);
-        buttonContainer.appendChild(deleteButton);
-
-        categoryItem.appendChild(categoryName);
-        categoryItem.appendChild(buttonContainer);
-        categoryContainer.insertBefore(categoryItem, addCategoryBtn);
-
-        // Обработчик удаления
-        deleteButton.addEventListener("click", function () {
-            categoryItem.remove();
-        });
-
-        // Обработчик редактирования
-        editButton.addEventListener("click", function () {
-            const input = document.createElement("input");
-            input.type = "text";
-            input.value = categoryName.textContent;
-            input.classList.add("edit-category-input");
-
-            categoryItem.insertBefore(input, categoryName);
-            categoryName.style.display = "none";
-            input.focus();
-
-            editButton.style.display = "none";
-            confirmButton.style.display = "inline";
-
-            confirmButton.addEventListener("click", function () {
-                if (input.value.trim() !== "") {
-                    categoryName.textContent = input.value.trim();
-                }
-                categoryItem.removeChild(input);
-                categoryName.style.display = "inline";
-                editButton.style.display = "inline";
-                confirmButton.style.display = "none";
-            });
-
-            // Подтверждение при нажатии Enter
-            input.addEventListener("keydown", function (event) {
-                if (event.key === "Enter") {
-                    confirmButton.click();
-                }
-            });
-        });
-    }
 });

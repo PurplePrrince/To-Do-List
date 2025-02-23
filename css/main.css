@@ -107,7 +107,7 @@ body {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
     padding: 5px;
 }
 
@@ -121,6 +121,19 @@ body {
 
 .task-buttons .delete-btn:hover {
     color: #dc3545;
+}
+
+.edit-input {
+    border: none;
+    outline: none;
+    flex-grow: 1;
+    font-size: 16px;
+    background: transparent;
+    color: gray;
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    width: 100%; /* Чтобы input занимал всю доступную ширину */
 }
 
 /* Добавление задачи */
