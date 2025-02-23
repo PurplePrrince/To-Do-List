@@ -5,9 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
     <link rel="shortcut icon" href="/icons/circle-check-solid.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <title>To Do List</title>
 </head>
 <body>
-    
+    <div class="container">
+        <aside class="sidebar">
+            <h2>To Do List</h2>
+            <ul class="categories">
+                <li>Понедельник</li>
+                <li class="active">Вторник</li>
+                <li class="add-category">+</li>
+            </ul>
+        </aside>
+        <main class="tasks">
+            <div class="task add-task">
+                <span>+</span>
+                <input type="text" placeholder="Введите название">
+            </div>
+        </main>
+    </div>
+    <script src="scripts/script.js"></script>
 </body>
 </html>
