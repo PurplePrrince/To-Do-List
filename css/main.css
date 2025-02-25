@@ -46,6 +46,10 @@
         font-size: 14px;
     }
 
+    .tasks .task-text {
+        max-width: 70%;
+    }
+
     /* Скрываем список категорий по умолчанию */
     .categories {
         display: none;
@@ -271,7 +275,7 @@ body {
 }
 
 .task-text {
-    max-width: 70%; /* Ограничиваем ширину */
+    max-width: 80%; /* Ограничиваем ширину */
     white-space: normal; /* Разрешаем перенос строк */
     word-wrap: break-word; /* Перенос длинных слов */
     overflow-wrap: break-word; /* Современный аналог */
