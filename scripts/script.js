@@ -8,6 +8,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const confirmCategoryButton = document.querySelector(".task-category-button .confirm-btn");
     const categoryList = document.querySelector(".categories");
     const addCategoryBtn = document.querySelector(".add-category");
+    const addTaskBlock = document.querySelector(".task.add-task");
+
+    function toggleAddTaskVisibility() {
+        const activeCategory = categoryList.querySelector("li.active");
+        if (activeCategory) {
+            addTaskBlock.style.display = "flex";
+        } else {
+            addTaskBlock.style.display = "none";
+        }
+    }
 
     function createTask(text) {
         const task = document.createElement("div");
@@ -58,10 +68,9 @@ document.addEventListener("DOMContentLoaded", function () {
             editButton.style.display = "none";
             confirmButton.style.display = "inline";
 
-            // Показываем оверлей
             overlay.style.display = "block";
-            task.style.position = "relative"; // Чтобы задача была поверх оверлея
-            task.style.zIndex = "20"; // Задача должна быть выше оверлея
+            task.style.position = "relative";
+            task.style.zIndex = "20";
         });
 
         confirmButton.addEventListener("click", function () {
@@ -72,8 +81,8 @@ document.addEventListener("DOMContentLoaded", function () {
             editButton.style.display = "inline";
 
             overlay.style.display = "none";
-            task.style.position = "static"; // Возвращаем позицию по умолчанию
-            task.style.zIndex = "auto"; // Возвращаем z-index по умолчанию
+            task.style.position = "static";
+            task.style.zIndex = "auto";
         });
 
         deleteButton.addEventListener("click", function () {
@@ -104,10 +113,8 @@ document.addEventListener("DOMContentLoaded", function () {
         editCategoryButton.style.display = "none";
         confirmCategoryButton.style.display = "inline";
     
-        // Показываем оверлей
         overlay.style.display = "block";
     
-        // Поднять task-category выше оверлея
         const taskCategory = document.querySelector(".task-category");
         taskCategory.style.position = "relative";
         taskCategory.style.zIndex = "100";
@@ -133,13 +140,10 @@ document.addEventListener("DOMContentLoaded", function () {
         editCategoryButton.style.display = "inline";
         confirmCategoryButton.style.display = "none";
 
-        // Обновляем название активной категории в списке
         updateSidebarCategory(newTitle);
     
-        // Скрываем оверлей
         overlay.style.display = "none";
     
-        // Возвращаем .task-category в нормальное состояние
         const taskCategory = document.querySelector(".task-category");
         taskCategory.style.position = "static";
         taskCategory.style.zIndex = "auto";
@@ -163,7 +167,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function setActiveCategory(category) {
-        // Удаляем старую активную категорию
         const prevActive = document.querySelector(".categories li.active");
         if (prevActive) {
             const text = prevActive.querySelector(".category-text").textContent;
@@ -171,7 +174,6 @@ document.addEventListener("DOMContentLoaded", function () {
             prevActive.classList.remove("active");
         }
 
-        // Создаем новую активную категорию
         category.classList.add("active");
         const text = category.textContent.trim();
         category.innerHTML = `<label class="category-text">${text}</label>
@@ -180,12 +182,87 @@ document.addEventListener("DOMContentLoaded", function () {
                 <button class="category-confirm-btn" style="display: none;"><i class="fas fa-check"></i></button>
                 <button class="category-delete-btn"><i class="fas fa-trash"></i></button>
             </div>`;
+        
+        toggleAddTaskVisibility();
     }
 
     categoryList.addEventListener("click", (event) => {
-        if (event.target.tagName === "LI" && !event.target.classList.contains("add-category")) {
-            setActiveCategory(event.target);
-            categoryTitle.textContent = event.target.querySelector(".category-text").textContent;
+        const target = event.target;
+
+        // Выбор категории
+        if (target.tagName === "LI" && !target.classList.contains("add-category")) {
+            setActiveCategory(target);
+            categoryTitle.textContent = target.querySelector(".category-text").textContent;
+        }
+
+        // Удаление категории
+        if (target.closest(".category-delete-btn")) {
+            const liToDelete = target.closest("li");
+            const isActive = liToDelete.classList.contains("active");
+
+            liToDelete.remove();
+
+            if (isActive) {
+                const firstCategory = categoryList.querySelector("li:not(.add-category)");
+                if (firstCategory) {
+                    setActiveCategory(firstCategory);
+                    categoryTitle.textContent = firstCategory.querySelector(".category-text").textContent;
+                } else {
+                    categoryTitle.textContent = "Нет категорий";
+                    toggleAddTaskVisibility();
+                }
+            }
+        }
+
+        // Редактирование категории
+        if (target.closest(".category-edit-btn")) {
+            const li = target.closest("li");
+            const categoryText = li.querySelector(".category-text");
+            const editBtn = li.querySelector(".category-edit-btn");
+            const confirmBtn = li.querySelector(".category-confirm-btn");
+
+            // Скрываем кнопку редактирования, показываем кнопку подтверждения
+            editBtn.style.display = "none";
+            confirmBtn.style.display = "inline";
+
+            // Заменяем текст на input
+            const input = document.createElement("input");
+            input.type = "text";
+            input.value = categoryText.textContent;
+            input.classList.add("edit-input");
+            categoryText.replaceWith(input);
+            input.focus();
+
+            // Обработка подтверждения изменений
+            function confirmEdit() {
+                const newName = input.value.trim() || "Без названия";
+                const newLabel = document.createElement("label");
+                newLabel.classList.add("category-text");
+                newLabel.textContent = newName;
+                input.replaceWith(newLabel);
+        
+                // Обновляем заголовок, если это активная категория
+                if (li.classList.contains("active")) {
+                    categoryTitle.textContent = newName;
+                }
+        
+                // Возвращаем кнопки в исходное состояние
+                editBtn.style.display = "inline";
+                confirmBtn.style.display = "none";
+        
+                // Удаляем обработчики, чтобы не срабатывали повторно
+                confirmBtn.removeEventListener("click", confirmEdit);
+                input.removeEventListener("keydown", handleEnterPress);
+            }
+        
+            function handleEnterPress(event) {
+                if (event.key === "Enter") {
+                    confirmEdit();
+                }
+            }
+        
+            confirmBtn.addEventListener("click", confirmEdit, { once: true });
+            input.addEventListener("keydown", handleEnterPress);
         }
     });
 
@@ -196,6 +273,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 const newCategory = document.createElement("li");
                 newCategory.textContent = input.value;
                 categoryList.insertBefore(newCategory, addCategoryBtn);
+                setActiveCategory(newCategory);
+                categoryTitle.textContent = newCategory.querySelector(".category-text").textContent;
             }
             addCategoryBtn.innerHTML = "+";
             addCategoryBtn.classList.remove("editing");
@@ -218,4 +297,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
     });
+
+    toggleAddTaskVisibility();
 });
