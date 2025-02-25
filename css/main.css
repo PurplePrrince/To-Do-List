@@ -8,6 +8,11 @@ body {
     background: #BED5FC;
 }
 
+.tasks h2 {
+    margin-top: 0;
+    color: #4A90E2;
+}
+
 /* Основной контейнер */
 .container {
     display: flex;
