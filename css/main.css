@@ -54,6 +54,13 @@ body {
     background-color: white;
     color: #4A90E2;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.categories li.active button {
+
 }
 
 .categories .add-category {
@@ -118,12 +125,17 @@ body {
     margin-right: 10px;
 }
 
+.category-btns {
+    display: flex;
+}
+
 .task-category-button, 
 .task-buttons {
     display: flex;
     gap: 5px;
 }
 
+.category-btns button,
 .task-category-button button, 
 .task-buttons button {
     background: none;

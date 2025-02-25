@@ -147,6 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     
     editCategoryButton.addEventListener("click", startEditingCategory);
+
     confirmCategoryButton.addEventListener("click", function () {
         const input = document.querySelector(".task-category input");
         if (input) {
@@ -190,6 +191,12 @@ document.addEventListener("DOMContentLoaded", function () {
             addCategoryBtn.innerHTML = '<i class="fas fa-check"></i>';
             addCategoryBtn.classList.add("editing");
             input.focus();
+
+            input.addEventListener("keypress", (e) => {
+                if (e.key === "Enter") {
+                    addCategoryBtn.click();
+                }
+            });
         }
     });
 });
