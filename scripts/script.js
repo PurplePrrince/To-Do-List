@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const editCategoryButton = document.querySelector(".task-category-button .edit-btn");
     const confirmCategoryButton = document.querySelector(".task-category-button .confirm-btn");
     const categories = document.querySelectorAll(".categories li:not(.add-category)");
-    const taskCategory = document.querySelector(".task-category");
 
     function createTask(text) {
         const task = document.createElement("div");
@@ -133,6 +132,9 @@ document.addEventListener("DOMContentLoaded", function () {
         categoryTitle = newH2;
         editCategoryButton.style.display = "inline";
         confirmCategoryButton.style.display = "none";
+
+        // Обновляем название активной категории в списке
+        updateSidebarCategory(newTitle);
     
         // Скрываем оверлей
         overlay.style.display = "none";
