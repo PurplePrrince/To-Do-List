@@ -10,18 +10,23 @@ document.addEventListener("DOMContentLoaded", function () {
     const addCategoryBtn = document.querySelector(".add-category");
     const addTaskBlock = document.querySelector(".task.add-task");
 
+    const tasksByCategory = {};
+
     function toggleAddTaskVisibility() {
         const activeCategory = categoryList.querySelector("li.active");
         if (activeCategory) {
             addTaskBlock.style.display = "flex";
+            editCategoryButton.style.display = "inline"; // Show edit button when there's an active category
         } else {
             addTaskBlock.style.display = "none";
+            editCategoryButton.style.display = "none"; // Hide edit button when no active category
         }
     }
 
-    function createTask(text) {
+    function createTask(text, categoryName) {
         const task = document.createElement("div");
         task.classList.add("task");
+        task.dataset.category = categoryName; // Store category association
     
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
@@ -53,8 +58,13 @@ document.addEventListener("DOMContentLoaded", function () {
         task.appendChild(checkbox);
         task.appendChild(label);
         task.appendChild(buttonContainer);
-        taskContainer.insertBefore(task, taskContainer.lastElementChild);
     
+        // Store task in tasksByCategory
+        if (!tasksByCategory[categoryName]) {
+            tasksByCategory[categoryName] = [];
+        }
+        tasksByCategory[categoryName].push(task);
+
         checkbox.addEventListener("change", function () {
             task.classList.toggle("completed", checkbox.checked);
         });
@@ -67,7 +77,6 @@ document.addEventListener("DOMContentLoaded", function () {
             task.replaceChild(input, label);
             editButton.style.display = "none";
             confirmButton.style.display = "inline";
-
             overlay.style.display = "block";
             task.style.position = "relative";
             task.style.zIndex = "20";
@@ -79,7 +88,6 @@ document.addEventListener("DOMContentLoaded", function () {
             task.replaceChild(label, input);
             confirmButton.style.display = "none";
             editButton.style.display = "inline";
-
             overlay.style.display = "none";
             task.style.position = "static";
             task.style.zIndex = "auto";
@@ -87,13 +95,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
         deleteButton.addEventListener("click", function () {
             task.remove();
+            // Remove from tasksByCategory
+            const index = tasksByCategory[categoryName].indexOf(task);
+            if (index > -1) {
+                tasksByCategory[categoryName].splice(index, 1);
+            }
         });
+
+        return task;
+    }
+
+    function displayTasksForCategory(categoryName) {
+        // Clear current tasks
+        const existingTasks = taskContainer.querySelectorAll(".task:not(.add-task)");
+        existingTasks.forEach(task => task.remove());
+        
+        // Display tasks for active category
+        if (tasksByCategory[categoryName]) {
+            tasksByCategory[categoryName].forEach(task => {
+                taskContainer.insertBefore(task, taskContainer.lastElementChild);
+            });
+        }
     }
 
     addTaskButton.addEventListener("click", function () {
         const taskText = addTaskInput.value.trim();
-        if (taskText !== "") {
-            createTask(taskText);
+        const activeCategory = categoryList.querySelector("li.active");
+        if (taskText !== "" && activeCategory) {
+            const categoryName = activeCategory.querySelector(".category-text").textContent;
+            const task = createTask(taskText, categoryName);
+            taskContainer.insertBefore(task, taskContainer.lastElementChild);
             addTaskInput.value = "";
         }
     });
@@ -184,22 +215,25 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>`;
         
         toggleAddTaskVisibility();
+        displayTasksForCategory(text); // Display tasks for new active category
     }
 
     categoryList.addEventListener("click", (event) => {
         const target = event.target;
 
-        // Выбор категории
         if (target.tagName === "LI" && !target.classList.contains("add-category")) {
             setActiveCategory(target);
             categoryTitle.textContent = target.querySelector(".category-text").textContent;
         }
 
-        // Удаление категории
+        // Update delete handler to clean up tasks
         if (target.closest(".category-delete-btn")) {
             const liToDelete = target.closest("li");
+            const categoryName = liToDelete.querySelector(".category-text").textContent;
             const isActive = liToDelete.classList.contains("active");
 
+            // Remove tasks associated with this category
+            delete tasksByCategory[categoryName];
             liToDelete.remove();
 
             if (isActive) {
