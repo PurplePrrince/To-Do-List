@@ -26,7 +26,7 @@
     }
 
     .categories .add-category {
-        padding: 5px;
+        padding: 15px;
     }
 
     .tasks .add-task,
@@ -208,6 +208,13 @@ body {
     flex-wrap: wrap;
 }
 
+.categories li {
+    white-space: normal; /* Разрешаем перенос строк */
+    word-wrap: break-word; /* Перенос длинных слов */
+    overflow-wrap: break-word; /* Современный аналог */
+    display: block; /* Позволяет перенос */
+}
+
 .categories li.active {
     background-color: white;
     color: #4A90E2;
@@ -228,6 +235,7 @@ body {
     white-space: normal; /* Разрешаем перенос строк */
     word-wrap: break-word; /* Перенос длинных слов */
     overflow-wrap: break-word; /* Современный аналог */
+    word-break: break-all; /* Добавьте это свойство */
     display: block; /* Позволяет перенос */
 }
 
@@ -243,6 +251,7 @@ body {
     justify-content: space-between;
     padding: 10px;
     margin-bottom: 15px;
+    word-break: break-all; /* Добавьте это свойство */
 }
 
 .task-category h2 {
@@ -267,6 +276,7 @@ body {
     background: #f0f5ff;
     border-radius: 5px;
     margin-bottom: 5px;
+    max-width: 100%;
 }
 
 .task label {
@@ -275,11 +285,11 @@ body {
 }
 
 .task-text {
-    max-width: 80%; /* Ограничиваем ширину */
     white-space: normal; /* Разрешаем перенос строк */
     word-wrap: break-word; /* Перенос длинных слов */
     overflow-wrap: break-word; /* Современный аналог */
     display: block; /* Позволяет перенос */
+    word-break: break-all; /* Добавьте это свойство */
 }
 
 /* Стили для зачёркивания */
@@ -311,6 +321,7 @@ body {
 .task-buttons {
     display: flex;
     gap: 5px;
+    margin-left: 10px;
 }
 
 .category-btns button,
