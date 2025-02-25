@@ -1,5 +1,7 @@
+/* Шрифт Google Fonts Sofia Sans */
 @import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@100;300;400;500;700;900&display=swap');
 
+/* Медиа запросы для мобильной версии */
 @media only screen and (max-width: 600px) {
     .container {
         display: flex;
@@ -66,6 +68,7 @@
     }
 }
 
+/* Анимация для панели с категориями */
 @keyframes slideDown {
     from {
         opacity: 0;
@@ -110,7 +113,7 @@ body {
     background-color: #DCE9FF;
     border-radius: 8px;
     overflow: hidden;
-    min-height: 90vh; /* Минимум 90% высоты экрана */
+    min-height: 90vh;
 }
 
 /* Боковая панель */
@@ -133,6 +136,7 @@ body {
     margin-bottom: 15px;
 }
 
+/* Бургер-меню */
 .burger-menu {
     width: 24px;
     height: 20px;
@@ -191,6 +195,7 @@ body {
     top: 13px;
 }
 
+/* Список категорий */
 .categories {
     list-style: none;
     padding: 0;
@@ -201,7 +206,7 @@ body {
     font-size: 16px;
     cursor: pointer;
     border-radius: 4px;
-    gap: 10px; /* Отступ между текстом и кнопками */
+    gap: 10px;
 }
 
 .categories label{
@@ -209,10 +214,10 @@ body {
 }
 
 .categories li {
-    white-space: normal; /* Разрешаем перенос строк */
-    word-wrap: break-word; /* Перенос длинных слов */
-    overflow-wrap: break-word; /* Современный аналог */
-    display: block; /* Позволяет перенос */
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    display: block;
 }
 
 .categories li.active {
@@ -231,12 +236,12 @@ body {
 }
 
 .category-text {
-    max-width: 70%; /* Ограничиваем ширину */
-    white-space: normal; /* Разрешаем перенос строк */
-    word-wrap: break-word; /* Перенос длинных слов */
-    overflow-wrap: break-word; /* Современный аналог */
-    word-break: break-all; /* Добавьте это свойство */
-    display: block; /* Позволяет перенос */
+    max-width: 70%;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
+    display: block;
 }
 
 /* Список задач */
@@ -251,15 +256,15 @@ body {
     justify-content: space-between;
     padding: 10px;
     margin-bottom: 15px;
-    word-break: break-all; /* Добавьте это свойство */
+    word-break: break-all;
 }
 
 .task-category h2 {
-    max-width: 70%; /* Ограничиваем ширину */
-    white-space: normal; /* Разрешаем перенос строк */
-    word-wrap: break-word; /* Перенос длинных слов */
-    overflow-wrap: break-word; /* Современный аналог */
-    display: block; /* Позволяет перенос */
+    max-width: 70%;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    display: block;
 }
 
 .edit-category {
@@ -267,7 +272,7 @@ body {
     border-radius: 5px;
 }
 
-/* Убираем кликабельность всей задачи */
+/* Задачи */
 .task {
     display: flex;
     align-items: center;
@@ -285,11 +290,11 @@ body {
 }
 
 .task-text {
-    white-space: normal; /* Разрешаем перенос строк */
-    word-wrap: break-word; /* Перенос длинных слов */
-    overflow-wrap: break-word; /* Современный аналог */
-    display: block; /* Позволяет перенос */
-    word-break: break-all; /* Добавьте это свойство */
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    display: block;
+    word-break: break-all;
 }
 
 /* Стили для зачёркивания */
@@ -313,6 +318,7 @@ body {
     margin-right: 10px;
 }
 
+/* Кнопки редактирования и удаления */
 .category-btns {
     display: flex;
 }
@@ -358,7 +364,7 @@ body {
     color: white;
     cursor: pointer;
     transition: background 0.2s ease;
-    width: 100%; /* Чтобы input занимал всю доступную ширину */
+    width: 100%;
 }
 
 .edit-input {
@@ -371,7 +377,7 @@ body {
     padding: 10px;
     cursor: pointer;
     transition: background 0.2s ease;
-    width: 100%; /* Чтобы input занимал всю доступную ширину */
+    width: 100%;
 }
 
 /* Добавление задачи */
@@ -402,6 +408,7 @@ body {
     color: gray;
 }
 
+/* Оверлей для редактирования задачи */
 .overlay {
     position: fixed;
     top: 0;

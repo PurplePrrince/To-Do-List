@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@100;300;400;500;700;900&display=swap');
 
+/* Общие настройки */
+
 body {
     background: #BED5FC;
     font-family: "Sofia Sans", serif;
@@ -13,6 +15,13 @@ h1 {
     font-weight: 400;
 }
 
+a {
+    color: #256eec;
+    text-decoration: none;
+    font-family: "Sofia Sans", serif;
+    font-weight: 600;
+}
+
 #container {
     width: 100%;
     margin: 0 auto;
@@ -20,6 +29,8 @@ h1 {
     display: flex;
     justify-content: center;
 }
+
+/* Кнопка */
 
 .button {
     display: inline-flex;
@@ -37,13 +48,6 @@ h1 {
     position: relative;
     overflow: hidden;
     cursor: pointer;
-}
-
-a {
-    color: #256eec;
-    text-decoration: none;
-    font-family: "Sofia Sans", serif;
-    font-weight: 600;
 }
 
 .button a {

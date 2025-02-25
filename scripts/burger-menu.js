@@ -2,6 +2,7 @@ const icon = document.querySelector('.burger-menu');
 const list = document.querySelector('.categories');
 const sidebar = document.querySelector('.sidebar');
 
+// Обработка нажатия на бургер-меню
 icon.addEventListener('click', (event) => {
     icon.classList.toggle('open');
 

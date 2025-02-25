@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="shortcut icon" href="/icons/circle-check-solid.svg">
+    <link rel="shortcut icon" href="icons/circle-check-solid.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <title>To Do List</title>
 </head>
 <body>
     <div class="container">
+
+        <!-- Панель с категориями -->
+
         <aside class="sidebar">
             <div class="nav">
                 <h2>To Do List</h2>
@@ -23,6 +26,9 @@
                 <li class="add-category">+</li>
             </ul>
         </aside>
+
+        <!-- Основная часть с задачами -->
+
         <main class="tasks">
             <div class="task-category">
                 <h2>Нет категории</h2>
@@ -41,6 +47,8 @@
             </div>
         </main>
     </div>
+
+    <!-- Оверлей для редактирования задач -->
 
     <div class="overlay" id="overlay"></div>
     
