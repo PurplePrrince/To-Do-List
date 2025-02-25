@@ -148,6 +148,18 @@ body {
     color: #000000;
 }
 
+.new-category-input {
+    border: none;
+    outline: none;
+    flex-grow: 1;
+    font-size: 16px;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    width: 100%; /* Чтобы input занимал всю доступную ширину */
+}
+
 .edit-input {
     border: none;
     outline: none;

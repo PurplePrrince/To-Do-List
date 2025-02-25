@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let categoryTitle = document.querySelector(".task-category h2");
     const editCategoryButton = document.querySelector(".task-category-button .edit-btn");
     const confirmCategoryButton = document.querySelector(".task-category-button .confirm-btn");
-    const categories = document.querySelectorAll(".categories li:not(.add-category)");
     const categoryList = document.querySelector(".categories");
     const addCategoryBtn = document.querySelector(".add-category");
 
@@ -169,7 +168,6 @@ document.addEventListener("DOMContentLoaded", function () {
             categoryTitle.textContent = event.target.textContent;
         }
     });
-    
 
     addCategoryBtn.addEventListener("click", () => {
         if (addCategoryBtn.classList.contains("editing")) {
