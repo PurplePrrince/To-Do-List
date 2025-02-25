@@ -144,12 +144,14 @@ document.addEventListener("DOMContentLoaded", function () {
         editCategoryButton.style.display = "none";
         confirmCategoryButton.style.display = "inline";
     
-        overlay.style.display = "block";
-    
         const taskCategory = document.querySelector(".task-category");
         taskCategory.style.position = "relative";
         taskCategory.style.zIndex = "100";
         taskCategory.classList.add("edit-category");
+
+        console.log("startEditingCategory called");
+        overlay.style.display = "block";
+        console.log("Overlay display set to block");
     
         input.addEventListener("keypress", function (e) {
             if (e.key === "Enter") {
@@ -170,15 +172,15 @@ document.addEventListener("DOMContentLoaded", function () {
         categoryTitle = newH2;
         editCategoryButton.style.display = "inline";
         confirmCategoryButton.style.display = "none";
-
         updateSidebarCategory(newTitle);
-    
-        overlay.style.display = "none";
     
         const taskCategory = document.querySelector(".task-category");
         taskCategory.style.position = "static";
         taskCategory.style.zIndex = "auto";
         taskCategory.classList.remove("edit-category");
+            
+        // Выключаем оверлей
+        overlay.style.display = "none";
     }
     
     editCategoryButton.addEventListener("click", startEditingCategory);

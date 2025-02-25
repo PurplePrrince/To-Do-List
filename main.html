@@ -11,14 +11,21 @@
 <body>
     <div class="container">
         <aside class="sidebar">
-            <h2>To Do List</h2>
+            <div class="nav">
+                <h2>To Do List</h2>
+                <div class="burger-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
             <ul class="categories">
                 <li class="add-category">+</li>
             </ul>
         </aside>
         <main class="tasks">
             <div class="task-category">
-                <h2>Понедельник</h2>
+                <h2>Нет категории</h2>
                 <div class="task-category-button">
                     <button class="edit-btn">
                         <i class="fas fa-edit"></i>
@@ -38,5 +45,6 @@
     <div class="overlay" id="overlay"></div>
     
     <script src="scripts/script.js"></script>
+    <script src="scripts/burger-menu.js"></script>
 </body>
 </html>

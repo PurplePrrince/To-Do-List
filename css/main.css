@@ -1,11 +1,96 @@
 @import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@100;300;400;500;700;900&display=swap');
 
+@media only screen and (max-width: 600px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container .sidebar h2 {
+        font-size: 20px;
+        margin: 0;
+    }
+
+    .container .sidebar {
+        width: auto;
+        padding-bottom: 0;
+    }
+
+    .container .tasks {
+        width: auto;
+    }
+
+    .container .task-category {
+        font-size: 16px;
+        padding: 0 10px;
+    }
+
+    .categories .add-category {
+        padding: 5px;
+    }
+
+    .tasks .add-task,
+    .tasks .task {
+        padding: 7px;
+    }
+
+    aside .category-btns,
+    .tasks .task-category-button, 
+    .task .task-buttons {
+        gap: 0px;
+    }
+
+    aside .category-btns button,
+    .tasks .task-category-button button, 
+    .task .task-buttons button {
+        font-size: 14px;
+    }
+
+    /* Скрываем список категорий по умолчанию */
+    .categories {
+        display: none;
+        position: relative;
+        width: 100%;
+        background-color: #4A90E2;
+        margin: 0;
+    }
+
+    /* Показываем и анимируем при добавлении класса open */
+    .categories.open {
+        display: block;
+        animation: slideDown 0.8s ease-out forwards;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
 /* Общие стили */
 body {
     font-family: "Sofia Sans", serif;
     margin: 0;
     padding: 0;
     background: #BED5FC;
+    min-width: 372px;
 }
 
 .tasks h2 {
@@ -35,7 +120,71 @@ body {
 .sidebar h2 {
     font-size: 30px;
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.burger-menu {
+    width: 24px;
+    height: 20px;
+    margin-top: 2px;
+    margin-right: 5px;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+}
+
+@media (min-width: 601px) {
+    .burger-menu {
+      display: none;
+    }
+}
+
+.burger-menu span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    position: absolute;
+    border-radius: 2px;
+    transition: .3 cubic-bezier(.8, .5, .2, 1.4);
+    transition-duration: 500ms;
+}
+
+.burger-menu span:nth-child(1) {
+    top: 0px;
+    left: 0px;
+}
+
+.burger-menu span:nth-child(2) {
+    top: 9px;
+    left: 0px;
+    opacity: 1;
+}
+
+.burger-menu span:nth-child(3) {
+    bottom: 0px;
+    left: 0px;
+}
+
+.burger-menu.open span:nth-child(1) {
+    transform: rotate(45deg);
+    top: 13px;
+}
+
+.burger-menu.open span:nth-child(2) {
+    opacity: 0;
+    left: 0px;
+}
+
+.burger-menu.open span:nth-child(3) {
+    transform: rotate(-45deg);
+    top: 13px;
 }
 
 .categories {
@@ -48,6 +197,11 @@ body {
     font-size: 16px;
     cursor: pointer;
     border-radius: 4px;
+    gap: 10px; /* Отступ между текстом и кнопками */
+}
+
+.categories label{
+    flex-wrap: wrap;
 }
 
 .categories li.active {
@@ -59,14 +213,18 @@ body {
     justify-content: space-between;
 }
 
-.categories li.active button {
-
-}
-
 .categories .add-category {
     font-size: 20px;
     text-align: center;
     font-weight: bold;
+}
+
+.category-text {
+    max-width: 70%; /* Ограничиваем ширину */
+    white-space: normal; /* Разрешаем перенос строк */
+    word-wrap: break-word; /* Перенос длинных слов */
+    overflow-wrap: break-word; /* Современный аналог */
+    display: block; /* Позволяет перенос */
 }
 
 /* Список задач */
@@ -81,6 +239,14 @@ body {
     justify-content: space-between;
     padding: 10px;
     margin-bottom: 15px;
+}
+
+.task-category h2 {
+    max-width: 70%; /* Ограничиваем ширину */
+    white-space: normal; /* Разрешаем перенос строк */
+    word-wrap: break-word; /* Перенос длинных слов */
+    overflow-wrap: break-word; /* Современный аналог */
+    display: block; /* Позволяет перенос */
 }
 
 .edit-category {
@@ -102,6 +268,14 @@ body {
 .task label {
     flex-grow: 1;
     transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.task-text {
+    max-width: 70%; /* Ограничиваем ширину */
+    white-space: normal; /* Разрешаем перенос строк */
+    word-wrap: break-word; /* Перенос длинных слов */
+    overflow-wrap: break-word; /* Современный аналог */
+    display: block; /* Позволяет перенос */
 }
 
 /* Стили для зачёркивания */
