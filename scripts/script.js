@@ -158,15 +158,34 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateSidebarCategory(newName) {
         const activeCategory = document.querySelector(".categories li.active");
         if (activeCategory) {
-            activeCategory.textContent = newName;
+            activeCategory.querySelector(".category-text").textContent = newName;
         }
+    }
+
+    function setActiveCategory(category) {
+        // Удаляем старую активную категорию
+        const prevActive = document.querySelector(".categories li.active");
+        if (prevActive) {
+            const text = prevActive.querySelector(".category-text").textContent;
+            prevActive.innerHTML = text;
+            prevActive.classList.remove("active");
+        }
+
+        // Создаем новую активную категорию
+        category.classList.add("active");
+        const text = category.textContent.trim();
+        category.innerHTML = `<label class="category-text">${text}</label>
+            <div class="category-btns">
+                <button class="category-edit-btn"><i class="fas fa-edit"></i></button>
+                <button class="category-confirm-btn" style="display: none;"><i class="fas fa-check"></i></button>
+                <button class="category-delete-btn"><i class="fas fa-trash"></i></button>
+            </div>`;
     }
 
     categoryList.addEventListener("click", (event) => {
         if (event.target.tagName === "LI" && !event.target.classList.contains("add-category")) {
-            document.querySelector(".categories li.active")?.classList.remove("active"); 
-            event.target.classList.add("active");
-            categoryTitle.textContent = event.target.textContent;
+            setActiveCategory(event.target);
+            categoryTitle.textContent = event.target.querySelector(".category-text").textContent;
         }
     });
 
