@@ -9,7 +9,7 @@ body {
 }
 
 .tasks h2 {
-    margin-top: 0;
+    margin: 0;
     color: #4A90E2;
 }
 
@@ -68,6 +68,19 @@ body {
     padding: 20px;
 }
 
+.task-category {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.edit-category {
+    background: #f0f5ff;
+    border-radius: 5px;
+}
+
 /* Убираем кликабельность всей задачи */
 .task {
     display: flex;
@@ -105,11 +118,13 @@ body {
     margin-right: 10px;
 }
 
+.task-category-button, 
 .task-buttons {
     display: flex;
     gap: 5px;
 }
 
+.task-category-button button, 
 .task-buttons button {
     background: none;
     border: none;
@@ -119,10 +134,12 @@ body {
     color: #007bff;
 }
 
+.task-category-button .confirm-btn,
 .task-buttons .confirm-btn {
     color: #28a745;
 }
 
+.task-category-button .edit-btn:hover,
 .task-buttons .edit-btn:hover {
     color: #000000;
 }
