@@ -3,6 +3,7 @@
 body {
     background: #BED5FC;
     font-family: "Sofia Sans", serif;
+    min-width: 372px;
 }
 
 h1 {
@@ -22,13 +23,13 @@ h1 {
 
 .button {
     display: inline-flex;
-    height: 40px;
-    width: 150px;
+    height: 80px;
+    width: 300px;
     border: 2px solid #256eec;
-    margin: 20px 20px 20px 20px;
+    margin: 20px;
     text-transform: uppercase;
     text-decoration: none;
-    font-size: .8em;
+    font-size: 30px;
     letter-spacing: 1.5px;
     align-items: center;
     justify-content: center;
@@ -54,8 +55,8 @@ a {
     transform: rotate(50deg);
     width: 100%;
     height: 250%;
-    left: -200px;
-    top: -30px;
+    left: -330px;
+    top: -50px;
     background: #256eec;
     position: absolute;
     transition: all .3s ease-Out;
