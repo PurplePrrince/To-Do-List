@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const editCategoryButton = document.querySelector(".task-category-button .edit-btn");
     const confirmCategoryButton = document.querySelector(".task-category-button .confirm-btn");
     const categories = document.querySelectorAll(".categories li:not(.add-category)");
+    const categoryList = document.querySelector(".categories");
+    const addCategoryBtn = document.querySelector(".add-category");
 
     function createTask(text) {
         const task = document.createElement("div");
@@ -122,7 +124,6 @@ document.addEventListener("DOMContentLoaded", function () {
             confirmEditingCategory(input);
         });
     }
-    
 
     function confirmEditingCategory(input) {
         const newTitle = input.value.trim() || "Без названия";
@@ -146,7 +147,6 @@ document.addEventListener("DOMContentLoaded", function () {
         taskCategory.classList.remove("edit-category");
     }
     
-
     editCategoryButton.addEventListener("click", startEditingCategory);
     confirmCategoryButton.addEventListener("click", function () {
         const input = document.querySelector(".task-category input");
@@ -162,11 +162,36 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    categories.forEach(category => {
-        category.addEventListener("click", function () {
-            document.querySelector(".categories li.active").classList.remove("active");
-            category.classList.add("active");
-            categoryTitle.textContent = category.textContent;
-        });
+    categoryList.addEventListener("click", (event) => {
+        if (event.target.tagName === "LI" && !event.target.classList.contains("add-category")) {
+            document.querySelector(".categories li.active")?.classList.remove("active"); 
+            event.target.classList.add("active");
+            categoryTitle.textContent = event.target.textContent;
+        }
+    });
+    
+
+    addCategoryBtn.addEventListener("click", () => {
+        if (addCategoryBtn.classList.contains("editing")) {
+            const input = document.querySelector(".new-category-input");
+            if (input.value.trim()) {
+                const newCategory = document.createElement("li");
+                newCategory.textContent = input.value;
+                categoryList.insertBefore(newCategory, addCategoryBtn);
+            }
+            addCategoryBtn.innerHTML = "+";
+            addCategoryBtn.classList.remove("editing");
+            input.parentElement.remove();
+        } else {
+            const newLi = document.createElement("li");
+            const input = document.createElement("input");
+            input.type = "text";
+            input.classList.add("new-category-input");
+            newLi.appendChild(input);
+            categoryList.insertBefore(newLi, addCategoryBtn);
+            addCategoryBtn.innerHTML = '<i class="fas fa-check"></i>';
+            addCategoryBtn.classList.add("editing");
+            input.focus();
+        }
     });
 });
